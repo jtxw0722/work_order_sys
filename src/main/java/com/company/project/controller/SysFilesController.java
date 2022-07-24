@@ -3,6 +3,7 @@ package com.company.project.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.company.project.common.aop.annotation.LogAnnotation;
 import com.company.project.common.utils.DataResult;
 import com.company.project.entity.SysFilesEntity;
 import com.company.project.service.SysFilesService;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * 文件上传
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -34,6 +35,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/upload")
+    @LogAnnotation(title = "文件管理", action = "新增")
     @RequiresPermissions(value = {"sysFiles:add", "sysContent:update", "sysContent:add"}, logical = Logical.OR)
     public DataResult add(@RequestParam(value = "file") MultipartFile file) {
         //判断文件是否空
@@ -45,6 +47,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
+    @LogAnnotation(title = "文件管理", action = "删除")
     @RequiresPermissions("sysFiles:delete")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysFilesService.removeByIdsAndFiles(ids);

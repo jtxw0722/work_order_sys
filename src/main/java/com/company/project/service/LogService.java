@@ -6,7 +6,7 @@ import com.company.project.entity.SysLog;
 /**
  * 系统日志
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */

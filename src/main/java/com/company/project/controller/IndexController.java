@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 视图
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */

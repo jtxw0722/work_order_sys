@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 /**
  * 定时任务日志
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -48,7 +48,7 @@ public class SysJobLogController {
     @ApiOperation(value = "清空定时任务日志")
     @DeleteMapping("/delete")
     @RequiresPermissions("sysJob:delete")
-    @LogAnnotation(title = "清空")
+    @LogAnnotation(title = "定时任务", action = "清空")
     public DataResult delete() {
         sysJobLogService.remove(Wrappers.emptyWrapper());
         return DataResult.success();

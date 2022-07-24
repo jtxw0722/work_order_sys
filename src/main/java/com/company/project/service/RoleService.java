@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 角色
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -58,4 +58,12 @@ public interface RoleService extends IService<SysRole> {
      * @return List
      */
     List<String> getRoleNames(String userId);
+
+    /**
+     * 根据角色名称获取角色ID
+     *
+     * @param roleName
+     * @return
+     */
+    String getRoleIdByRoleName(String roleName);
 }

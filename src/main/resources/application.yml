@@ -12,7 +12,7 @@ spring:
   resources:
     add-mappings: false
   application:
-    name: springboot-manager
+    name: work_order_sys
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.company.project.entity.SysUser;
 import com.company.project.entity.SysUserRole;
 import com.company.project.mapper.SysUserRoleMapper;
 import com.company.project.service.UserRoleService;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * 用户角色 服务类
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */

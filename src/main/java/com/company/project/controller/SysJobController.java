@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * 定时任务
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -42,7 +42,7 @@ public class SysJobController {
     private SysJobService sysJobService;
 
     @ApiOperation(value = "新增")
-    @LogAnnotation(title = "新增")
+    @LogAnnotation(title = "定时任务", action = "新增")
     @PostMapping("/add")
     @RequiresPermissions("sysJob:add")
     public DataResult add(@RequestBody SysJobEntity sysJob) {
@@ -61,7 +61,7 @@ public class SysJobController {
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
     @RequiresPermissions("sysJob:delete")
-    @LogAnnotation(title = "删除")
+    @LogAnnotation(title = "定时任务", action = "删除")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysJobService.delete(ids);
         return DataResult.success();
@@ -70,7 +70,7 @@ public class SysJobController {
     @ApiOperation(value = "更新")
     @PutMapping("/update")
     @RequiresPermissions("sysJob:update")
-    @LogAnnotation(title = "更新")
+    @LogAnnotation(title = "定时任务", action = "更新")
     public DataResult update(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
             return DataResult.fail("cron表达式有误");
@@ -102,7 +102,7 @@ public class SysJobController {
      * 立即执行任务
      */
     @ApiOperation(value = "立即执行任务")
-    @LogAnnotation(title = "立即执行任务")
+    @LogAnnotation(title = "定时任务", action = "立即执行")
     @PostMapping("/run")
     @RequiresPermissions("sysJob:run")
     public DataResult run(@RequestBody List<String> ids) {
@@ -115,7 +115,7 @@ public class SysJobController {
      * 暂停定时任务
      */
     @ApiOperation(value = "暂停定时任务")
-    @LogAnnotation(title = "暂停定时任务")
+    @LogAnnotation(title = "定时任务", action = "暂停")
     @PostMapping("/pause")
     @RequiresPermissions("sysJob:pause")
     public DataResult pause(@RequestBody List<String> ids) {
@@ -128,7 +128,7 @@ public class SysJobController {
      * 恢复定时任务
      */
     @ApiOperation(value = "恢复定时任务")
-    @LogAnnotation(title = "恢复定时任务")
+    @LogAnnotation(title = "定时任务", action = "恢复")
     @PostMapping("/resume")
     @RequiresPermissions("sysJob:resume")
     public DataResult resume(@RequestBody List<String> ids) {
@@ -155,7 +155,6 @@ public class SysJobController {
 
 
     @ApiOperation(value = "获取运行时间")
-    @LogAnnotation(title = "获取运行时间")
     @PostMapping("/getRecentTriggerTime")
     @RequiresPermissions("sysJob:add")
     public DataResult getRecentTriggerTime(String cron) {

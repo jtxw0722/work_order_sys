@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.company.project.common.content.RoleContent;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
 import com.company.project.common.utils.PasswordUtils;
@@ -26,11 +27,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 用户 服务类
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -50,6 +52,8 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
     private SysDeptMapper sysDeptMapper;
     @Resource
     private HttpSessionService httpSessionService;
+    @Resource
+    private UserService userService;
 
     @Value("${spring.redis.allowMultipleLogin}")
     private Boolean allowMultipleLogin;
@@ -153,6 +157,17 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         vo.setUpdateId(httpSessionService.getCurrentUserId());
         sysUserMapper.updateById(vo);
 
+    }
+
+    @Override
+    public List<SysUser> getProjectUserAll() {
+        String roleId = roleService.getRoleIdByRoleName(RoleContent.PART_MANAGER);
+        if (StringUtils.isBlank(roleId)) {
+            throw new BusinessException("无项目负责人可选！");
+        }
+        List<String> userIdList = userRoleService.getUserIdsByRoleId(roleId);
+        List<SysUser> userList = sysUserMapper.selectBatchIds(userIdList);
+        return userList;
     }
 
     @Override

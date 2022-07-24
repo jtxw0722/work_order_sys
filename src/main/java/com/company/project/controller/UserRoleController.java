@@ -17,7 +17,7 @@ import javax.validation.Valid;
 /**
  * 用户和角色关联
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */

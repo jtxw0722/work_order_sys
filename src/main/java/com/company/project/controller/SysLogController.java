@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 系统操作日志
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -32,7 +32,6 @@ public class SysLogController {
 
     @PostMapping("/logs")
     @ApiOperation(value = "分页查询系统操作日志接口")
-    @LogAnnotation(title = "系统操作日志管理", action = "分页查询系统操作日志")
     @RequiresPermissions("sys:log:list")
     public DataResult pageInfo(@RequestBody SysLog vo) {
         LambdaQueryWrapper<SysLog> queryWrapper = Wrappers.lambdaQuery();
@@ -54,7 +53,7 @@ public class SysLogController {
 
     @DeleteMapping("/logs")
     @ApiOperation(value = "删除日志接口")
-    @LogAnnotation(title = "系统操作日志管理", action = "删除系统操作日志")
+    @LogAnnotation(title = "系统操作日志", action = "删除")
     @RequiresPermissions("sys:log:deleted")
     public DataResult deleted(@RequestBody List<String> logIds) {
         logService.removeByIds(logIds);

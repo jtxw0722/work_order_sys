@@ -6,10 +6,12 @@ import com.company.project.entity.SysUser;
 import com.company.project.vo.resp.LoginRespVO;
 import com.company.project.vo.resp.UserOwnRoleRespVO;
 
+import java.util.List;
+
 /**
  * 用户 服务类
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -73,4 +75,11 @@ public interface UserService extends IService<SysUser> {
      * @param vo vo
      */
     void updateUserInfoMy(SysUser vo);
+
+    /**
+     * 获取所有项目管理人员
+     *
+     * @return
+     */
+    List<SysUser> getProjectUserAll();
 }

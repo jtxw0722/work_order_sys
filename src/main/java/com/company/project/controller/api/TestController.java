@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 /**
  * api test示例
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年5月11日
  */

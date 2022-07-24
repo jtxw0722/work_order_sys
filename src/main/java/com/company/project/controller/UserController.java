@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.aop.annotation.LogAnnotation;
 import com.company.project.common.exception.code.BaseResponseCode;
 import com.company.project.common.utils.DataResult;
+import com.company.project.entity.SysDept;
 import com.company.project.entity.SysUser;
 import com.company.project.entity.SysUserRole;
 import com.company.project.service.HttpSessionService;
@@ -31,7 +32,7 @@ import java.util.List;
 /**
  * 用户管理
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -87,7 +88,7 @@ public class UserController {
 
     @PutMapping("/user/info")
     @ApiOperation(value = "更新用户信息接口")
-    @LogAnnotation(title = "用户管理", action = "更新用户信息")
+    @LogAnnotation(title = "用户管理", action = "更新")
     public DataResult updateUserInfoById(@RequestBody SysUser vo) {
         userService.updateUserInfoMy(vo);
         return DataResult.success();
@@ -95,7 +96,6 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     @ApiOperation(value = "查询用户详情接口")
-    @LogAnnotation(title = "用户管理", action = "查询用户详情")
     @RequiresPermissions("sys:user:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
         return DataResult.success(userService.getById(id));
@@ -103,7 +103,6 @@ public class UserController {
 
     @GetMapping("/user")
     @ApiOperation(value = "查询用户详情接口")
-    @LogAnnotation(title = "用户管理", action = "查询用户详情")
     public DataResult youSelfInfo() {
         String userId = httpSessionService.getCurrentUserId();
         return DataResult.success(userService.getById(userId));
@@ -112,7 +111,6 @@ public class UserController {
     @PostMapping("/users")
     @ApiOperation(value = "分页获取用户列表接口")
     @RequiresPermissions("sys:user:list")
-    @LogAnnotation(title = "用户管理", action = "分页获取用户列表")
     public DataResult pageInfo(@RequestBody SysUser vo) {
         return DataResult.success(userService.pageInfo(vo));
     }
@@ -120,7 +118,7 @@ public class UserController {
     @PostMapping("/user")
     @ApiOperation(value = "新增用户接口")
     @RequiresPermissions("sys:user:add")
-    @LogAnnotation(title = "用户管理", action = "新增用户")
+    @LogAnnotation(title = "用户管理", action = "新增")
     public DataResult addUser(@RequestBody @Valid SysUser vo) {
         userService.addUser(vo);
         return DataResult.success();
@@ -151,7 +149,7 @@ public class UserController {
 
     @DeleteMapping("/user")
     @ApiOperation(value = "删除用户接口")
-    @LogAnnotation(title = "用户管理", action = "删除用户")
+    @LogAnnotation(title = "用户管理", action = "删除")
     @RequiresPermissions("sys:user:deleted")
     public DataResult deletedUser(@RequestBody @ApiParam(value = "用户id集合") List<String> userIds) {
         //删除用户， 删除redis的绑定的角色跟权限
@@ -164,7 +162,6 @@ public class UserController {
 
     @GetMapping("/user/roles/{userId}")
     @ApiOperation(value = "赋予角色-获取所有角色接口")
-    @LogAnnotation(title = "用户管理", action = "赋予角色-获取所有角色接口")
     @RequiresPermissions("sys:user:role:detail")
     public DataResult getUserOwnRole(@PathVariable("userId") String userId) {
         DataResult result = DataResult.success();
@@ -190,5 +187,13 @@ public class UserController {
         //刷新权限
         httpSessionService.refreshUerId(userId);
         return DataResult.success();
+    }
+
+    @GetMapping("/user/project")
+    @ApiOperation(value = "获取项目管理人接口")
+    @RequiresPermissions("sys:dept:list")
+    public DataResult getProjectUserAll() {
+        List<SysUser> userList = userService.getProjectUserAll();
+        return DataResult.success(userList);
     }
 }

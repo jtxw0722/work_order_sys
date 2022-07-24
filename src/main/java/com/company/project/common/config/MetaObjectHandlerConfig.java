@@ -16,7 +16,7 @@ import java.util.HashSet;
 /**
  * mybatis plus 默认值配置
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */

@@ -168,6 +168,9 @@
                     {field: 'email', title: '邮箱', width: 150},
                     {
                         field: 'sex', title: '性别', width: 100, templet: function (item) {
+                            if (item.sex === 0) {
+                                return "未知";
+                            }
                             if (item.sex === 1) {
                                 return "男";
                             }

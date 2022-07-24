@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.company.project.common.aop.annotation.LogAnnotation;
 import com.company.project.common.utils.DataResult;
 import com.company.project.entity.SysDictDetailEntity;
 import com.company.project.service.SysDictDetailService;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * 字典明细管理
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -35,6 +36,7 @@ public class SysDictDetailController {
     @ApiOperation(value = "新增")
     @PostMapping("/add")
     @RequiresPermissions("sysDict:add")
+    @LogAnnotation(title = "字典明细管理", action = "新增")
     public DataResult add(@RequestBody SysDictDetailEntity sysDictDetail) {
         if (StringUtils.isEmpty(sysDictDetail.getValue())) {
             return DataResult.fail("字典值不能为空");
@@ -53,6 +55,7 @@ public class SysDictDetailController {
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
     @RequiresPermissions("sysDict:delete")
+    @LogAnnotation(title = "字典明细管理", action = "删除")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysDictDetailService.removeByIds(ids);
         return DataResult.success();
@@ -61,6 +64,7 @@ public class SysDictDetailController {
     @ApiOperation(value = "更新")
     @PutMapping("/update")
     @RequiresPermissions("sysDict:update")
+    @LogAnnotation(title = "字典明细管理", action = "更新")
     public DataResult update(@RequestBody SysDictDetailEntity sysDictDetail) {
         if (StringUtils.isEmpty(sysDictDetail.getValue())) {
             return DataResult.fail("字典值不能为空");

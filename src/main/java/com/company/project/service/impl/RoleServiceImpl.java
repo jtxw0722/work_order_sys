@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * 角色
  *
- * @author wenbin
+ * @author jiangtingxiwang
  * @version V1.0
  * @date 2020年3月18日
  */
@@ -162,5 +162,12 @@ public class RoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impleme
             return null;
         }
         return sysRoles.stream().map(SysRole::getName).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getRoleIdByRoleName(String roleName) {
+        LambdaQueryWrapper<SysRole> queryWrapper = Wrappers.<SysRole>lambdaQuery().eq(SysRole::getName, roleName);
+        SysRole sysRole = sysRoleMapper.selectOne(queryWrapper);
+        return sysRole.getId();
     }
 }

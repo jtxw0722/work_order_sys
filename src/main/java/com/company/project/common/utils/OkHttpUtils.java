@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Ok http utils
- * @author wenbin.li
+ * @author jiangtingxiwang.li
  */
 public class OkHttpUtils {
     private static OkHttpClient okHttpClient;
